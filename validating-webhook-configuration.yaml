@@ -1,0 +1,20 @@
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: image-signature-webhook
+webhooks:
+  - name: image-signature-webhook
+    rules:
+      - apiGroups:
+          - ""
+        apiVersions:
+          - v1
+        operations:
+          - CREATE
+        resources:
+          - pods
+    failurePolicy: Ignore
+    clientConfig:
+	service:
+        name: image-signature-webhook  
+        namespace: default
